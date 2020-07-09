@@ -29,7 +29,7 @@ class ApprovalView(viewsets.ModelViewSet):
     serializer_class = ApprovalSerializers
 
 def mapdata(df):
-    ohe_col = joblib.load('C:/Users/George D/Visual Studio/Django/django-loan/static/all_col.sav')
+    ohe_col = joblib.load('django-loan\static\all_col.sav')
     cat_columns = ['Gender','Married', 'Education', 'Self_Employed', 'Property_Area']
     df1=pd.get_dummies(df, columns=cat_columns)
     newdf = {}
@@ -81,11 +81,11 @@ def mapdata(df):
 # @api_view(["POST"])
 def ApprovalReject(unit):
     try:
-        model = joblib.load('C:/Users/George D/Visual Studio/Django/django-loan/static/gradient_model.sav')
+        model = joblib.load('django-loan\static\gradient_model.sav')
         # mydata = request.data
         # unit = np.array(list(mydata.values()))
         # unit = unit.reshape(1,-1)
-        scalers = joblib.load('C:/Users/George D/Visual Studio/Django/django-loan/static/stand_scaler.sav')
+        scalers = joblib.load('django-loan\static\scaler.sav')
         X = scalers.transform(unit)
         y_pred = model.predict(X)
         # y_pred = (y_pred<1)
